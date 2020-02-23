@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Button} from 'react-native';
 
 import Square from './Square';
 
@@ -9,6 +9,11 @@ const Table = props => {
   const increment = () => {
     setClicks(prevCount => prevCount + 1);
   };
+
+  const pressRestartHandler = () => {
+    setClicks(0);
+  };
+
   return (
     <View>
       <View style={styles.row}>
@@ -26,6 +31,12 @@ const Table = props => {
         <Square onClick={increment} clicks={clicks} />
         <Square onClick={increment} clicks={clicks} />
       </View>
+      <View style={styles.restart}>
+        <Button
+          title="Restart"
+          onPress={pressRestartHandler}
+        />
+      </View>
     </View>
   );
 };
@@ -33,6 +44,9 @@ const Table = props => {
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
+  },
+  restart: {
+    marginVertical: 50,
   },
 });
 
