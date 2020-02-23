@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, StyleSheet, Button} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 import Square from './Square';
 
@@ -15,38 +15,38 @@ const Table = props => {
   };
 
   return (
-    <View>
+    <View style={styles.tableContainer}>
       <View style={styles.row}>
-        <Square onClick={increment} clicks={clicks} />
-        <Square onClick={increment} clicks={clicks} />
-        <Square onClick={increment} clicks={clicks} />
+        {[...Array(9)].map((e, i) => (
+          <Square key={i} index={i} onClick={increment} clicks={clicks} />
+        ))}
       </View>
-      <View style={styles.row}>
-        <Square onClick={increment} clicks={clicks} />
-        <Square onClick={increment} clicks={clicks} />
-        <Square onClick={increment} clicks={clicks} />
-      </View>
-      <View style={styles.row}>
-        <Square onClick={increment} clicks={clicks} />
-        <Square onClick={increment} clicks={clicks} />
-        <Square onClick={increment} clicks={clicks} />
-      </View>
-      <View style={styles.restart}>
-        <Button
-          title="Restart"
-          onPress={pressRestartHandler}
-        />
-      </View>
+      <TouchableOpacity style={styles.restart} onPress={pressRestartHandler}>
+        <Text>Restart</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  tableContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   row: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 20,
   },
   restart: {
     marginVertical: 50,
+    width: '100%',
+    paddingHorizontal: 50,
+    paddingVertical: 10,
+    backgroundColor: 'skyblue',
+    borderRadius: 5,
   },
 });
 

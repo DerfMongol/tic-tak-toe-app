@@ -3,14 +3,33 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 const Square = props => {
   const [xO, setxO] = useState(' ');
+  const [xOColor, setxOColor] = useState('');
   const [oneClick, setOneClick] = useState(true);
+  const [border, setBorder] = useState();
 
   useEffect(() => {
     if (props.clicks === 0) {
       setxO(' ');
       setOneClick(true);
     }
-  })
+    console.log(props.index);
+    if ([0, 1, 3, 4].includes(props.index)) {
+      setBorder({
+        borderRightWidth: 2,
+        borderBottomWidth: 2,
+      });
+    }
+    if ([2, 5].includes(props.index)) {
+      setBorder({
+        borderBottomWidth: 2,
+      });
+    }
+    if ([6, 7].includes(props.index)) {
+      setBorder({
+        borderRightWidth: 2,
+      });
+    }
+  }, [props.index, props.clicks]);
 
   const squarePressHandler = () => {
     props.onClick();
@@ -19,17 +38,19 @@ const Square = props => {
     }
     if (props.clicks % 2 === 0) {
       setxO('O');
+      setxOColor('red');
     } else {
       setxO('X');
+      setxOColor('green');
     }
   };
 
   let TouchCmp = oneClick ? TouchableOpacity : View;
 
   return (
-    <View style={styles.square}>
+    <View style={[styles.square, border]}>
       <TouchCmp style={styles.button} onPress={squarePressHandler}>
-        <Text style={styles.xo}>{xO}</Text>
+        <Text style={[styles.xo, {color: xOColor}]}>{xO}</Text>
       </TouchCmp>
     </View>
   );
@@ -38,16 +59,14 @@ const Square = props => {
 const styles = StyleSheet.create({
   square: {
     justifyContent: 'center',
-    width: 100,
+    width: '30%',
   },
   button: {
     padding: 20,
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: 'black',
+    alignItems: 'center'
   },
   xo: {
-    fontSize: 20,
+    fontSize: 30,
   },
 });
 
