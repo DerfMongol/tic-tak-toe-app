@@ -1,10 +1,12 @@
 import React from 'react'
 import {View, Text, StyleSheet} from 'react-native'
 
+import Table from './components/table/Table'
+
 const App = props => {
   return (
     <View style={styles.setup}>
-      <Text style={styles.setupText}>Tic Tak Toe Bitch</Text>
+      <Table />
     </View>
   )
 }
