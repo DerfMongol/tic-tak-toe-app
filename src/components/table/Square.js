@@ -12,7 +12,6 @@ const Square = props => {
       setxO(' ');
       setOneClick(true);
     }
-    console.log(props.index);
     if ([0, 1, 3, 4].includes(props.index)) {
       setBorder({
         borderRightWidth: 2,
@@ -32,16 +31,24 @@ const Square = props => {
   }, [props.index, props.clicks]);
 
   const squarePressHandler = () => {
-    props.onClick();
-    if (oneClick) {
-      setOneClick(false);
-    }
-    if (props.clicks % 2 === 0) {
-      setxO('O');
-      setxOColor('red');
-    } else {
-      setxO('X');
-      setxOColor('green');
+    if (props.finalClick) {
+      props.onClick();
+      if (oneClick) {
+        setOneClick(false);
+      }
+
+      let copyGrid = [...props.grid];
+      if (props.clicks % 2 === 0) {
+        setxO('O');
+        copyGrid[props.index] = 'O';
+        props.setGrid(copyGrid);
+        setxOColor('red');
+      } else {
+        setxO('X');
+        copyGrid[props.index] = 'X';
+        props.setGrid(copyGrid);
+        setxOColor('green');
+      }
     }
   };
 
@@ -63,7 +70,7 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 20,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   xo: {
     fontSize: 30,
