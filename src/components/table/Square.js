@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 
 const Square = props => {
   const [xO, setxO] = useState(' ');
-  const [xOColor, setxOColor] = useState('');
+  const [xOColor, setxOColor] = useState('red');
   const [oneClick, setOneClick] = useState(true);
   const [border, setBorder] = useState();
 
@@ -66,14 +66,15 @@ const Square = props => {
 const styles = StyleSheet.create({
   square: {
     justifyContent: 'center',
-    width: '30%',
+    width: 100,
+    height: 100,
   },
   button: {
     padding: 20,
     alignItems: 'center',
   },
   xo: {
-    fontSize: 30,
+    fontSize: 40,
   },
 });
 
